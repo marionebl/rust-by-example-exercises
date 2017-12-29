@@ -34,6 +34,7 @@ fn main() {
 
     // Instantiate a `Point`
     let point: Point = Point { x: 0.3, y: 0.4 };
+    let point2: Point = Point { x: 0.3, y: 0.4 };
 
     println!("point coordinates: ({}, {})", point.x, point.y);
 
@@ -52,8 +53,11 @@ fn main() {
         p2: Point { x: 10.0, y: 11.0 }
     };
 
+    let _rectangle3 = square(point2, 20.0);
+
     println!("Area {}", rect_area(_rectangle));
     println!("Area {}", rect_area(_rectangle2));
+    println!("Area {}", rect_area(_rectangle3));
 
     // Instantiate a unit struct
     let _nil = Nil;
@@ -77,4 +81,8 @@ fn rect_area(rect: Rectangle) -> f32 {
     } = rect;
 
     (x1 - x2).abs() * (y1 - y2).abs()
+}
+
+fn square(p2: Point, l: f32) -> Rectangle {
+    Rectangle { p1: Point { x: p2.x - l, y: p2.y -l }, p2 }
 }
