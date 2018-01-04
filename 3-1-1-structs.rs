@@ -12,6 +12,7 @@ struct Nil;
 #[allow(dead_code)]
 struct Pair(i32, f32);
 
+#[derive(Debug)]
 struct Point {
     x: f32,
     y: f32,
@@ -19,6 +20,7 @@ struct Point {
 
 // Structs can be reused as fields
 #[allow(dead_code)]
+#[derive(Debug)]
 struct Rectangle {
     p1: Point,
     p2: Point,
@@ -45,4 +47,19 @@ fn main() {
     let Pair(integer, decimal) = pair;
 
     println!("pair contains {:?} and {:?}", integer, decimal);
+
+    let rect = Rectangle { p1: point, p2: Point { x: 1.0, y: 1.0 } };
+
+    let a = rect_area(&rect);
+
+    println!("area of {rect:?} is {a}", rect=rect, a=a);
+}
+
+fn rect_area(rect: &Rectangle) -> f32 {
+    let &Rectangle { 
+        p1: Point { x: x1, y: y1 }, 
+        p2: Point { x: x2, y: y2 }
+    } = rect;
+
+    return (x2 - x1).abs() * (y2 - y1).abs();
 }
