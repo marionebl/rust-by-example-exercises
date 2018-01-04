@@ -53,6 +53,10 @@ fn main() {
     let a = rect_area(&rect);
 
     println!("area of {rect:?} is {a}", rect=rect, a=a);
+
+    let b = square(Point {x: 0.5, y: 0.5}, 1.3);
+
+    println!("square {:?}", b);   
 }
 
 fn rect_area(rect: &Rectangle) -> f32 {
@@ -62,4 +66,12 @@ fn rect_area(rect: &Rectangle) -> f32 {
     } = rect;
 
     return (x2 - x1).abs() * (y2 - y1).abs();
+}
+
+fn square(origin: Point, dimension: f32) -> Rectangle {
+    let Point {
+        x, y
+    } = origin;
+
+    Rectangle{ p1: origin, p2: Point { x: x + dimension, y: y + dimension}}
 }
