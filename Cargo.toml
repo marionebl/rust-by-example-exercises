@@ -1,6 +1,4 @@
 [package]
+authors = ["Mario Nebl <hello@mario-nebl.de>"]
 name = "rust-by-example-exercises"
 version = "0.1.0"
-authors = ["Mario Nebl <hello@mario-nebl.de>"]
-
-[dependencies]
