@@ -5,8 +5,6 @@ Exercise code created while following along [Rust by Example](https://rustbyexam
 ## Prequesites
 
 * Rust `1.22`
-* ``
-* `cargo-tree`
 
 ## Getting started
 
