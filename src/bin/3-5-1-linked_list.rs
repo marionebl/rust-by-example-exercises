@@ -1,5 +1,6 @@
 use List::*;
 
+#[derive(Debug)]
 enum List {
     // Cons: Tuple struct that wraps an element and a pointer to the next node
     Cons(u32, Box<List>),
@@ -18,6 +19,8 @@ impl List {
         // `Cons` also has type List
         Cons(elem, Box::new(self))
     }
+
+    // TODO: How to implement append?
 
     fn len(&self) -> u32 {
         // `self` has to be matched because the behaviour of this method
