@@ -9,6 +9,23 @@ struct Circle {
     radius: i32
 }
 
+// std::string::ToString should not be implemented when std::fmt::Display is implemented
+// from the docs: https://doc.rust-lang.org/std/string/trait.ToString.html
+// > This trait is automatically implemented for any type which implements the Display trait. 
+// > As such, ToString shouldn't be implemented directly: Display should be implemented instead, 
+// > and you get the ToString implementation for free.
+//
+// The compiler produces a non-descriptive error, though: 
+// error[E0119]: conflicting implementations of trait `std::string::ToString` for type `Circle`:
+// ...
+// note: conflicting implementation in crate `alloc`
+// 
+// impl ToString for Circle {
+//     fn to_string(&self) -> String {
+//         format!("(r: {})", self.radius)
+//     }
+// }
+
 impl FromStr for Circle {
     type Err = ParseIntError;
 
