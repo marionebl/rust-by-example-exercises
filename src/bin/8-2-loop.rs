@@ -20,6 +20,7 @@ fn main() {
     }
 
     nested_loop();
+    return_loop();
 }
 
 fn nested_loop() {
@@ -35,4 +36,25 @@ fn nested_loop() {
     }
 
     println!("Exited the outer loop");
+}
+
+fn return_loop() {
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+        match act_up(counter) {
+            Ok(r) => break r,
+            Err(_) => continue
+        }
+    };
+
+    assert_eq!(result, 5);
+}
+
+fn act_up(i: i32) -> Result<i32, i32> {
+    match i {
+        _ if i == 5 => Ok(i),
+        _ => Err(i)
+    }
 }
