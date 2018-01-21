@@ -24,7 +24,32 @@ fn main() {
             _ => println!("Ain't special")
         }
 
-        destructure_enum();
+        println!("Enter a color:");
+
+        let color = match get_color_input() {
+            Ok(color) => color,
+            Err(_) => {
+                println!("Try again.");
+                continue;
+            },
+        };
+
+        match color {
+            Color::Red => println!("Color: Red"),
+            Color::Blue => println!("Color: Blue"),
+            Color::Green => println!("Color: Green"),
+            Color::RGB(r, g, b) =>
+                println!("Red: {}, green: {}, and blue: {}!", r, g, b),
+            Color::HSV(h, s, v) =>
+                println!("Hue: {}, saturation: {}, value: {}!", h, s, v),
+            Color::HSL(h, s, l) =>
+                println!("Hue: {}, saturation: {}, lightness: {}!", h, s, l),
+            Color::CMY(c, m, y) =>
+                println!("Cyan: {}, magenta: {}, yellow: {}!", c, m, y),
+            Color::CMYK(c, m, y, k) =>
+                println!("Cyan: {}, magenta: {}, yellow: {}, key (black): {}!",
+                    c, m, y, k),
+        }
     }
 }
 
@@ -45,20 +70,9 @@ fn get_input() -> Result<i32, InputError> {
     }
 }
 
-fn is_prime(num: i32) -> bool {
-    match num {
-        0 | 1 => false,
-        2 => true,
-        n => {
-            for i in 2..(n as f64).sqrt() as i64+1 {
-                if n % (i as i32) == 0 {
-                    return false
-                }
-            }
-
-            true
-        }
-    }
+enum ColorInputError {
+    Io(io::Error),
+    Parse
 }
 
 enum Color {
@@ -72,25 +86,32 @@ enum Color {
     CMYK(u8, u8, u8, u8)
 }
 
-fn destructure_enum() {
-    let color = Color::RGB(122, 17, 40);
+fn get_color_input() -> Result<Color, ColorInputError> {
+    let mut input = String::new();
+    match io::stdin().read_line(&mut input) {
+        Ok(i) => Ok(i),
+        Err(err) => Err(ColorInputError::Io(err)),
+    }?;
+    match input.trim() {
+        "Red" => Ok(Color::Red),
+        "Blue" => Ok(Color::Blue),
+        "Green" => Ok(Color::Green), 
+        _ => Err(ColorInputError::Parse)
+    }
+}
 
-    println!("What color is it?");
+fn is_prime(num: i32) -> bool {
+    match num {
+        0 | 1 => false,
+        2 => true,
+        n => {
+            for i in 2..(n as f64).sqrt() as i64+1 {
+                if n % (i as i32) == 0 {
+                    return false
+                }
+            }
 
-    match color {
-        Color::Red => println!("Red"),
-        Color::Blue => println!("Blue"),
-        Color::Green => println!("Green"),
-        Color::RGB(r, g, b) =>
-            println!("Red: {}, green: {}, and blue: {}!", r, g, b),
-        Color::HSV(h, s, v) =>
-            println!("Hue: {}, saturation: {}, value: {}!", h, s, v),
-        Color::HSL(h, s, l) =>
-            println!("Hue: {}, saturation: {}, lightness: {}!", h, s, l),
-        Color::CMY(c, m, y) =>
-            println!("Cyan: {}, magenta: {}, yellow: {}!", c, m, y),
-        Color::CMYK(c, m, y, k) =>
-            println!("Cyan: {}, magenta: {}, yellow: {}, key (black): {}!",
-                c, m, y, k),
+            true
+        }
     }
 }
