@@ -1,3 +1,5 @@
+#[allow(dead_code)]
+
 use std::io;
 use std::num;
 
@@ -21,6 +23,8 @@ fn main() {
             num if is_prime(num) => println!("Is a prime"),
             _ => println!("Ain't special")
         }
+
+        destructure_enum();
     }
 }
 
@@ -54,5 +58,39 @@ fn is_prime(num: i32) -> bool {
 
             true
         }
+    }
+}
+
+enum Color {
+    Red,
+    Blue,
+    Green,
+    RGB(u8, u8, u8),
+    HSV(u16, u8, u8),
+    HSL(u16, u8, u8),
+    CMY(u8, u8, u8),
+    CMYK(u8, u8, u8, u8)
+}
+
+fn destructure_enum() {
+    let color = Color::RGB(122, 17, 40);
+
+    println!("What color is it?");
+
+    match color {
+        Color::Red => println!("Red"),
+        Color::Blue => println!("Blue"),
+        Color::Green => println!("Green"),
+        Color::RGB(r, g, b) =>
+            println!("Red: {}, green: {}, and blue: {}!", r, g, b),
+        Color::HSV(h, s, v) =>
+            println!("Hue: {}, saturation: {}, value: {}!", h, s, v),
+        Color::HSL(h, s, l) =>
+            println!("Hue: {}, saturation: {}, lightness: {}!", h, s, l),
+        Color::CMY(c, m, y) =>
+            println!("Cyan: {}, magenta: {}, yellow: {}!", c, m, y),
+        Color::CMYK(c, m, y, k) =>
+            println!("Cyan: {}, magenta: {}, yellow: {}, key (black): {}!",
+                c, m, y, k),
     }
 }
