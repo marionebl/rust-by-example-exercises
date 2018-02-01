@@ -19,8 +19,16 @@ fn main() {
     };
 
     apply(diary);
+
+    let double = |x| x * 2;
+
+    apply_to_three(double);
 }
 
 fn apply<F>(mut f: F) where F: FnOnce() {
     f();
 } 
+
+fn apply_to_three<F>(f: F) -> i32 where F: Fn(i32) -> i32 {
+    f(3)
+}
