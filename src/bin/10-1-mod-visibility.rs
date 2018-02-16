@@ -3,6 +3,7 @@ fn main() {
     my_mod::function();
 
     my_mod::indirect_access();
+    my_mod::nested::function();
 
     // error[E0603]: function `private_function` is private
     // my_mod::private_function();
@@ -24,5 +25,11 @@ mod my_mod {
     pub fn indirect_access() {
         print!("called `my_mod::indirect_access()`, that\n> ");
         private_function();
+    }
+
+    pub mod nested {
+        pub fn function() {
+            println!("called `my_mod::nested::function()`");
+        }
     }
 }
