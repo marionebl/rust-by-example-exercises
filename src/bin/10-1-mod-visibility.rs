@@ -2,6 +2,8 @@ fn main() {
     function();
     my_mod::function();
 
+    my_mod::indirect_access();
+
     // error[E0603]: function `private_function` is private
     // my_mod::private_function();
 }
@@ -16,6 +18,11 @@ mod my_mod {
     }
 
     pub fn function() {
-        println!("called my_mod::function()")
+        println!("called `my_mod::function()`")
+    }
+
+    pub fn indirect_access() {
+        print!("called `my_mod::indirect_access()`, that\n> ");
+        private_function();
     }
 }
