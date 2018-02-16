@@ -12,6 +12,9 @@ fn main() {
 
     // error[E0603]: function `public_function_in_my_mod` is private
     // my_mod::nested::public_function_in_my_mod();
+
+    // error[E0603]: function `private_function` is private
+    // my_mod::nested::private_function();
 }
 
 fn function() {
@@ -46,6 +49,11 @@ mod my_mod {
     pub mod nested {
         pub fn function() {
             println!("called `my_mod::nested::function()`");
+        }
+
+        #[allow(dead_code)]
+        fn private_function() {
+            println!("called `my_mod::nested::private_function()`");
         }
 
         pub(in my_mod) fn public_function_in_my_mod() {
