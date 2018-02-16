@@ -9,6 +9,9 @@ fn main() {
 
     // error[E0603]: function `private_function` is private
     // my_mod::private_function();
+
+    // error[E0603]: function `public_function_in_my_mod` is private
+    // my_mod::nested::public_function_in_my_mod();
 }
 
 fn function() {
