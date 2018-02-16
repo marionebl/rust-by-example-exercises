@@ -5,6 +5,7 @@ fn main() {
     my_mod::indirect_access();
     my_mod::nested::function();
     my_mod::call_public_function_in_my_mod();
+    my_mod::public_function_in_crate();
 
     // error[E0603]: function `private_function` is private
     // my_mod::private_function();
@@ -33,6 +34,10 @@ mod my_mod {
         nested::public_function_in_my_mod();
         print!("> ");
         nested::public_function_in_super_mod();
+    }
+
+    pub(crate) fn public_function_in_crate() {
+        println!("called `my_mod::public_function_in_crate()`");
     }
 
     pub mod nested {
