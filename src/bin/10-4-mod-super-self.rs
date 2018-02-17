@@ -2,6 +2,10 @@ fn main() {
     my::indirect_call();
 }
 
+fn function() {
+    println!("called `function()`");
+}
+
 mod my {
     fn function() {
         println!("called `my::function()`");
@@ -14,6 +18,8 @@ mod my {
         function();
 
         self::cool::function();
+
+        super::function();
     }
 
     mod cool {
