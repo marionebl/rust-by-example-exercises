@@ -20,11 +20,22 @@ mod my {
         self::cool::function();
 
         super::function();
+
+        {
+            use cool::function as root;
+            root();
+        }
     }
 
     mod cool {
         pub fn function() {
             println!("called `my::cool::function()`");
         }
+    }
+}
+
+mod cool {
+    pub fn function() {
+        println!("called `cool::function()`");
     }
 }
