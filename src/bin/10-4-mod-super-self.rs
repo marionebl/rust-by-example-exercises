@@ -12,5 +12,13 @@ mod my {
 
         self::function();
         function();
+
+        self::cool::function();
+    }
+
+    mod cool {
+        pub fn function() {
+            println!("called `my::cool::function()`");
+        }
     }
 }
