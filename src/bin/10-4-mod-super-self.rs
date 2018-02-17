@@ -18,6 +18,7 @@ mod my {
         function();
 
         self::cool::function();
+        cool::function();
 
         super::function();
 
