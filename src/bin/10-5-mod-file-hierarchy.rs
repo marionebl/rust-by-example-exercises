@@ -7,4 +7,5 @@ fn function() {
 fn main() {
     my::function();
     function();
+    my::indirect_access();
 }
