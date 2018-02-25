@@ -20,5 +20,5 @@ fn main() {
     println!("A blue jay is {}", blue(&blue_jay));
 
     // error[E0277]: the trait bound `Turkey: Red` is not satisfied
-    // println!("A turkey is {}", red(&_turkey));
+    //println!("A turkey is {}", red(&_turkey));
 }
